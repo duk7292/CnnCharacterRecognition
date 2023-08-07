@@ -1,0 +1,1 @@
+ich habe angefangen indem ich die cvs in Normalisiert habe dann label und Bild getrennt habe und dann in test und train
