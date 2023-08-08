@@ -1,1 +1,3 @@
 ich habe angefangen indem ich die cvs in Normalisiert habe dann label und Bild getrennt habe und dann in test und train
+dann habe ich die ConvolutionLayer class erstellt
+danach habe ich alle anderen layer als class erstellt und schleife durch sie raus und nehme denn output

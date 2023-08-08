@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Daten einlesen
-dataRaw = pd.read_csv('A_Z_Handwritten_Data.csv')
+dataRaw = pd.read_csv('A_Z_Handwritten_Data_small.csv')
 
 # Jedes n-te Element auswählen
 n = 700
