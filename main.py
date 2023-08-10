@@ -27,15 +27,20 @@ def main():
         ut.ConvolutionLayer(32,3),
         ut.ReLuLayer,
         ut.MaxPooling2D(2),
-        ut.FlattenLayer
+        ut.FlattenLayer,
+        ut.DenseLayer(126,50176),
+        ut.ReLuLayer,
+        ut.DenseLayer(26,126),
+        ut.softmaxLayer
             ]
 
     for i, (image, label) in enumerate(zip(images_train, labels_train)): 
         output = ut.CNN_forward(image,layers)
-        print(output.shape)
+        label_arr = np.zeros(len(output))
+        label_arr[label] = 1
+        cross_entropy = -np.sum(label_arr * np.log(output))
+
         
-            
-    
 
 if __name__ == "__main__":
     main()
