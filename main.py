@@ -5,7 +5,7 @@ import utils as ut
 import matplotlib.pyplot as plt
 def main():
     # CSV-Datei einlesen
-    dataRaw = pd.read_csv('A_Z_Handwritten_Data.csv').to_numpy().astype(float)
+    dataRaw = pd.read_csv('A_Z_Handwritten_Data_small.csv').to_numpy().astype(float)
     np.random.shuffle(dataRaw)
     fraction = 0.1
     dataRaw = dataRaw[:int(len(dataRaw) * fraction)]
@@ -22,24 +22,32 @@ def main():
  
     layers = [
         ut.ConvolutionLayer(32,3),
-        ut.ReLuLayer,
+        ut.ReLuLayer(),
         ut.MaxPooling2D(2),
         ut.ConvolutionLayer(32,3),
-        ut.ReLuLayer,
+        ut.ReLuLayer(),
         ut.MaxPooling2D(2),
-        ut.FlattenLayer,
+        ut.FlattenLayer(),
         ut.DenseLayer(126,50176),
-        ut.ReLuLayer,
+        ut.ReLuLayer(),
         ut.DenseLayer(26,126),
-        ut.softmaxLayer
+        ut.softmaxLayer()
             ]
 
     for i, (image, label) in enumerate(zip(images_train, labels_train)): 
         output = ut.CNN_forward(image,layers)
         label_arr = np.zeros(len(output))
         label_arr[label] = 1
-        cross_entropy = -np.sum(label_arr * np.log(output))
+        
+        cross_entropy =-np.sum(label_arr * np.log(output))
+        
 
+        error = output - label_arr  
+        ut.CNN_backward(error, layers)
+
+
+        
+        
         
 
 if __name__ == "__main__":
