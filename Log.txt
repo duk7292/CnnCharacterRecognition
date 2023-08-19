@@ -4,3 +4,23 @@ danach habe ich alle anderen layer als class erstellt und schleife durch sie rau
 
 ich hab den cross_entropy berechnet und als error in die backward eingegeben welche ich vorerst quasi nur durchlaufen lassen habe jetzt 
 schreibe ich jeweils die einzelenen backwards methoden
+
+nachdem ich alle backwards methoden gemacht habe habe ich eine accuracy function gemacht und in batches trainiert ich erreichte werte von 8 %
+Hier die Ersten vermutungen die ich habe warum es so schlecht funktioniert
+
+1. Falsche implementierung einzelner layers
+2. Schlecht gewählte learning rate
+3. Schlecht gewählte Netzgröße/struktur
+4. zu kleine trainingsdauer
+
+
+Hier meine Lösungs Ansätze
+
+1.Ich teste alle Layer Klasses einzeln in einem Neuem Script Testen un gegebenenfalls verbesseren
+2,3.falls alle implementierungen richtig sind werde ich gucken ob ich die learining rate anpassen sollte dies Kombieniere ich mit punkt 3 und teste direkt beides
+da beide punkte zusammenhängen außerdem werde ich für verschidene dinge wie bias,kernel,weight verschidene learining rates Testen
+4.ich werde wenn nicht zu funktionieren scheint die rechnugen auf die gpu verlagern und dann testen ob es nach langer trainings dauer besser wird
+
+ich konnte keinen direkten fehler in der implementierung entdecken jedoch viel mir auf das wenn ich die outputs angucke die von batcxh zu batch kleiner wurden bis sie schlussendlich bei 0 und dann nan landeten 
+dann sah ich das der error a anfang so brechnet wurde error =  output -label_arr  was bedeutete das ich anstelle der minimierung des fehlers diesen maximierte
+nach behebung davon und etwas rumspielerrei mit der learning rate bekomme ich werte von bis zu 25%

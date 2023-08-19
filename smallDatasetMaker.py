@@ -1,10 +1,10 @@
 import pandas as pd
 
 # Daten einlesen
-dataRaw = pd.read_csv('A_Z_Handwritten_Data_small.csv')
+dataRaw = pd.read_csv('A_Z_Handwritten_Data.csv')
 
 # Jedes n-te Element auswählen
-n = 700
+n = 15
 dataRaw_n = dataRaw.iloc[::n, :]
 
 # In eine neue CSV-Datei schreiben
