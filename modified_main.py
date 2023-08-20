@@ -84,7 +84,7 @@ def main():
         ut.DenseLayer(26,126,learning_rate),
         ut.softmaxLayer()
             ]
-    def train_in_batches(images_train, labels_train, layers, batch_size=100):
+    def train_in_batches(images_train, labels_train, layers, batch_size=1000):
         global learning_rate
        
         num_batches = len(images_train) // batch_size
@@ -94,8 +94,9 @@ def main():
             
             batch_predictions = []
             batch_labels = []
+            batch_label_arr = []
          
-            if(batch_idx % 5 == 0):
+            if(batch_idx % 30 == 0):
                 learning_rate /=5
                 print(learning_rate)
 
@@ -103,8 +104,9 @@ def main():
             start_idx = batch_idx * batch_size
             end_idx = start_idx + batch_size
             last_label = 0
+            total_batch_label_arr = np.zeros(26)
+            total_batch_predictions = np.zeros(26)
             for i, (image, label) in enumerate(zip(images_train[start_idx:end_idx], labels_train[start_idx:end_idx])):
-                ut.CNN_forward(image, layers)[0]
                 output = ut.CNN_forward(image, layers)[0]
                 
                 label_arr = np.zeros(len(output))
@@ -113,10 +115,12 @@ def main():
                 
                 batch_predictions.append(output)
                 batch_labels.append(label)
-
-                error = label_arr  -output
-                ut.CNN_backward(error, layers)
-                last_label = label
+                batch_label_arr.append(label_arr)
+                total_batch_label_arr += label_arr
+                total_batch_predictions += output
+            error =  total_batch_label_arr - total_batch_predictions
+            ut.CNN_backward(error, layers)
+            
             for i in range(len(batch_labels)):
 
                 print(batch_labels[i], np.argmax(batch_predictions[i]))
