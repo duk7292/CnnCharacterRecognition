@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.signal import convolve2d
-import cupy as cp
+import cupy as cp 
 class ConvolutionLayer:
     def __init__(self,kernel_num,kernel_size,learning_rate) -> None:
         self.learning_rate = learning_rate

@@ -104,7 +104,7 @@ def train(batch_size = 250 ,back_cluster_size = 1):
                 return (time.time()-st)
             
             learning_rate_idx = int(accuracy // 10)
-
+ 
             lr = lrList[learning_rate_idx]
 
 
